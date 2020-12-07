@@ -40,7 +40,7 @@ app.use('/posts', postRoute);
 app.listen(port, function() {
   console.log('listening on port 3000!');
 
-var port = process.env.PORT || 1300;
+var port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
