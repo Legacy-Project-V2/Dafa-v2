@@ -1,13 +1,15 @@
 var express = require('express');
+var app = express();
 var cors = require('cors');
 var mongoose = require('mongoose');
-var dotenv=require('dotenv');
 
 require('dotenv').config();
 
 var app = express();
 
+
 var port = process.env.PORT || 3000;
+
 
 //midleware
 app.use(cors());
@@ -24,13 +26,21 @@ connection.once('open', function() {
 //Connect to routers
 const addItemsRouter = require('./routes/addItems');
 const addUserRouter = require('./routes/addUser');
+const postRoute = require('./routes/posts')
+
 //const logInRouter = require('./routes/login')
 app.use('/addItems', addItemsRouter);
 app.use('/addUser', addUserRouter);
+app.use('/posts', postRoute);
 //app.use('/login', logInRouter);
+
 
 
 //Run the server
 app.listen(port, function() {
   console.log('listening on port 3000!');
+
+var port = process.env.PORT || 1300;
+app.listen(port, () => {
+  console.log(`Server is running on port: ${port}`);
 });
