@@ -14,6 +14,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import EditItems from './components/edit';
 
+// import CategoryList from './components/CategoryList';
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
 
         <Route path = "/homepage" component = { Homepage } />
         <ProtectedRoute path="/ItemsList" component={ItemsList} isAuth={localStorage.length>0}/>
+        {/* <ProtectedRoute path="/ItemsList" component={CategoryList} isAuth={localStorage.length>0}/> */}
         <ProtectedRoute path="/addItems" component={AddItems} isAuth={localStorage.length>0}/>
         <Route path = "/addUser"  component = { Signup } />
         <Route path = "/login" component = { Login } />

@@ -25,7 +25,7 @@ const ClothesItem = props => (
     </tr>
 )
 
-class ItemsList extends Component {
+class CategoryList extends Component {
 
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ class ItemsList extends Component {
 
         this.state = {
             items: [],
-            filteredItems :[],
+            filteredCategory :[],
             SearchString:'',
         }
     }
@@ -57,10 +57,10 @@ class ItemsList extends Component {
         })
     }
 
-    itemsList() {
-        let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
+    categoryList() {
+        let listedCategory = (this.state.filteredCategory.length > 0)? this.state.filteredCategory : this.state.items; 
 
-        return listedItems.map(currentItem => {
+        return listedCategory.map(currentItem => {
             return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
         })
     } 
@@ -69,10 +69,10 @@ class ItemsList extends Component {
         let { items } = this.state
         let string = e.target.value
         if(string.length > 0){
-           let filteredItems = items.filter(item => item.itemName.includes(string))
-           this.setState({SearchString:string,filteredItems:filteredItems})
+           let filteredCategory = items.filter(item => item.category.includes(string))
+           this.setState({SearchString:string,filteredCategory:filteredCategory})
         }
-        else this.setState({SearchString:string,filteredItems:[]})
+        else this.setState({SearchString:string,filteredCategory:[]})
     }
 
 
@@ -83,7 +83,7 @@ class ItemsList extends Component {
             <br />
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
-                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
+                <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Category"/>
                 <table className = "table">
                 <thead className = "thead">
                     <tr>
@@ -96,7 +96,7 @@ class ItemsList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.itemsList()}
+                    {this.categoryList()}
                 </tbody>
                 </table>
             </div>
@@ -106,4 +106,4 @@ class ItemsList extends Component {
     }
 }
 
-export default withRouter(ItemsList)
+export default withRouter(CategoryList)

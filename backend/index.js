@@ -6,7 +6,7 @@ var dotenv=require('dotenv');
 require('dotenv').config();
 
 var app = express();
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 3000;
 //midleware
 app.use(cors());
 app.use(express.json());
@@ -30,5 +30,5 @@ app.use('/addUser', addUserRouter);
 
 //Run the server
 app.listen(port, function() {
-  console.log('listening on port 8000!');
+  console.log('listening on port 3000!');
 });
