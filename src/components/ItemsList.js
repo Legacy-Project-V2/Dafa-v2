@@ -3,7 +3,8 @@ import { Link ,withRouter } from "react-router-dom" ;
 import axios from "axios";
 import Footer from './Footer';
 
-//
+
+
 const ClothesItem = props => (
     <tr>
         <td>{props.item.itemName}</td>
@@ -40,7 +41,7 @@ class ItemsList extends Component {
     }
 
     componentDidMount() {
-         axios.get("http://localhost:1300/addItems/")   
+         axios.get("http://localhost:3000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
             })
@@ -50,7 +51,7 @@ class ItemsList extends Component {
     }
 
     deleteItem(id) {
-        axios.delete("http://localhost:1300/addItems/" + id)
+        axios.delete("http://localhost:3000/addItems/" + id)
             .then(res => console.log(res.data));
         this.setState({
             items: this.state.items.filter(el => el._id !== id)
@@ -84,26 +85,36 @@ class ItemsList extends Component {
             <div className = "container text-center border border-light p-9">
                 <h2>Clothing</h2>
                 <input name="search" className="form-control" onChange={e => this.onSearch(e)} value={this.state.SearchString}  placeholder="Search for item Name"/>
-                <table className = "table">
-                <thead className = "thead">
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Category</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Image</th>
+                 <div className = "col-md-4">
+                        <label>
+                            Sort By
+                            <select name="search" className = "form-control"  onChange={e => this.onSearch(e)} value={this.state.SearchString} >
+                                <option value = "">Women</option>
+                                <option value = "">Men</option>
+                                <option value = "">Kids</option>
+                            </select>
+                        </label>
+                    </div>
+                  <table className = "table">
+                 <thead className = "thead">
+                     <tr>
+                         <th>Item Name</th>
+                         <th>Category</th>
+                         <th>Type</th>
+                         <th>Description</th>
+                         <th>Image</th>
                         
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.itemsList()}
-                </tbody>
-                </table>
-            </div>
-            <Footer />
-            </div>
-        )
-    }
+                     </tr>
+                 </thead>
+                 <tbody>
+                     {this.itemsList()}
+                 </tbody>
+                 </table>
+             </div>
+             <Footer />
+             </div>
+         )
+     }
 }
 
 export default withRouter(ItemsList)

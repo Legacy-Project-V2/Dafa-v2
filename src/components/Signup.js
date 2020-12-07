@@ -71,7 +71,7 @@ export default class Signup extends Component {
             //add conctions if the user name already taken
             //if(this.state.username )
            
-            axios.post("http://localhost:1300/addUser/adduser", user)
+            axios.post("http://localhost:3000/addUser/adduser", user)
             .then(res => {
             // console.log(user);
 
