@@ -6,7 +6,9 @@ var dotenv=require('dotenv');
 require('dotenv').config();
 
 var app = express();
+
 var port = process.env.PORT || 3000;
+
 //midleware
 app.use(cors());
 app.use(express.json());

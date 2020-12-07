@@ -12,7 +12,7 @@ const ClothesItem = props => (
         <td>{props.item.description}</td>
         
         <td>
-        <img src= {props.item.image} width="200" height="200" class="w3-round" alt="Norway"/>
+        <img src= {props.item.image} width="200" height="200" className="w3-round" alt="Norway"/>
         </td>
         <td>
         <Link to ={"/edit/"+props.item._id} className="btn btn-deep-orange darken-4" >Edit</Link>
@@ -40,7 +40,7 @@ class ItemsList extends Component {
     }
 
     componentDidMount() {
-         axios.get("http://localhost:3000/addItems/")   
+         axios.get("http://localhost:1300/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
             })
@@ -50,7 +50,7 @@ class ItemsList extends Component {
     }
 
     deleteItem(id) {
-        axios.delete("http://localhost:3000/addItems/" + id)
+        axios.delete("http://localhost:1300/addItems/" + id)
             .then(res => console.log(res.data));
         this.setState({
             items: this.state.items.filter(el => el._id !== id)

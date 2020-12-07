@@ -40,7 +40,7 @@ export default class Login extends Component {
           password: this.state.password
         } 
         
-        axios.post("http://localhost:3000/addUser/login", user)
+        axios.post("http://localhost:1300/addUser/login", user)
         .then(response =>{
       // console.log (response)
        window.localStorage.setItem('token', response.data);

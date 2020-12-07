@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
-
+// import UserContext from "./context"
 
 import Homepage from './components/Homepage';
 import Navbar from './components/Navbar';
@@ -17,14 +17,13 @@ import EditItems from './components/edit';
 // import CategoryList from './components/CategoryList';
 
 function App() {
-  
   return (
     <Router className = "container">
       <div>
         
         <Navbar />
 
-        <Route path = "/homepage" component = { Homepage } />
+        
         <ProtectedRoute path="/ItemsList" component={ItemsList} isAuth={localStorage.length>0}/>
         {/* <ProtectedRoute path="/ItemsList" component={CategoryList} isAuth={localStorage.length>0}/> */}
         <ProtectedRoute path="/addItems" component={AddItems} isAuth={localStorage.length>0}/>
@@ -32,6 +31,7 @@ function App() {
         <Route path = "/login" component = { Login } />
         <Route path = "/edit/:id" component = { EditItems }/>
         <Route path = "/logout" component = { Login } />
+        <Route path = "/" component = { Homepage } />
     
       </div>
     </Router>

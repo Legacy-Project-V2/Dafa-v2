@@ -70,7 +70,7 @@ import Footer from './Footer';
 
     console.log(item);
 
-    axios.post("http://localhost:3000/addItems/add", item)
+    axios.post("http://localhost:1300/addItems/add", item)
       .then(res => console.log(res.data));
 
     window.location = '/ItemsList'
@@ -91,7 +91,7 @@ import Footer from './Footer';
                 <div className="col">
                 <label>Item Name</label>
                 <input 
-                required="true"
+                required="{true}"
                   type = "text" 
                   className = "form-control" 
                   value = {this.state.itemName} 
@@ -106,7 +106,7 @@ import Footer from './Footer';
                   <label>Select Category  </label>
                   <select
                     ref = "userInput"
-                    required="true"
+                    required="{true}"
                     className = "form-control"
                     value = {this.state.category}
                     onChange = {this.onChangeCategory}
@@ -123,7 +123,7 @@ import Footer from './Footer';
                   <label>Select Type  </label>
                   <select
                     ref = "userInput"
-                    required="true"
+                    required="{true}"
                     className = "form-control"
                     value = {this.state.type}
                     onChange = {this.onChangetype}
@@ -145,7 +145,7 @@ import Footer from './Footer';
                   <label>Description  </label>
                   <input 
                     type = "text" 
-                    required="true"
+                    required="{true}"
                     className = "form-control" 
                     value = {this.state.description} 
                     onChange = {this.onChangeDescription}
@@ -158,7 +158,7 @@ import Footer from './Footer';
                     <label>Add Image as URL</label>
                     <input 
                       type = "text" 
-                      required="true"
+                      required="{true}"
                       className = "form-control" 
                       value = {this.state.image} 
                       onChange = {this.onChangeimg}/>

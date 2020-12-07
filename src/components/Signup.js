@@ -71,11 +71,12 @@ export default class Signup extends Component {
             //add conctions if the user name already taken
             //if(this.state.username )
            
-            axios.post("http://localhost:3000/addUser/adduser", user)
+            axios.post("http://localhost:1300/addUser/adduser", user)
             .then(res => {
             // console.log(user);
 
             window.location = '/login'
+           console.log(window.location)
 
             })  
              
@@ -103,7 +104,7 @@ export default class Signup extends Component {
                 <div className = "col">
                 <label > User Name </label>
                 <br></br>
-                <input required='true' type='text'className="form-control col"value= {this.setState.username}onChange={this.onChangeUsername} placeholder='User Name'/>                   
+                <input required='{true}' type='text'className="form-control col"value= {this.setState.username}onChange={this.onChangeUsername} placeholder='User Name'/>                   
                 <br></br>                
                 </div>
 
@@ -112,21 +113,21 @@ export default class Signup extends Component {
                 <div className = "col">
                 <label > Creat Password </label>
                 <br></br>
-                <input required='true'  type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Creat Password' />
+                <input required='{true}'  type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Creat Password' />
                 <br></br>
                 </div>
 
                 <div className = "col">
                 <label > Phone Number </label>
 
-                <input required='true'  className="form-control col"  value= {this.setState.phone} onChange={this.onChangePhone} placeholder='Phone Number' />
+                <input required='{true}'  className="form-control col"  value= {this.setState.phone} onChange={this.onChangePhone} placeholder='Phone Number' />
                 <br></br>
                 </div>
 
                 <div className = "col">
                 <label > Address </label>
                 <br></br>
-                <input required='true' type='text' className="form-control col" value= {this.setState.address} onChange={this.onChangeAddress} placeholder='Address' />
+                <input required='{true}' type='text' className="form-control col" value= {this.setState.address} onChange={this.onChangeAddress} placeholder='Address' />
                 <br></br>
                 </div>
 
