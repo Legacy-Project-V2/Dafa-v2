@@ -8,7 +8,7 @@ require('dotenv').config();
 var app = express();
 
 
-var port = process.env.PORT || 3000;
+
 
 
 //midleware
@@ -37,11 +37,9 @@ app.use('/posts', postRoute);
 
 
 //Run the server
-app.listen(port, function() {
-  console.log('listening on port 3000!');
+
 
 var port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
-})

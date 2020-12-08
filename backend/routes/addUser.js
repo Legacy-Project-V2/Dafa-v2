@@ -89,7 +89,7 @@ res.header('addUser-token', token).send({
     username: user.username,
   },
 });
-console.log(token)
+// console.log(token)
 // res.send('Logged In!')
 });
   

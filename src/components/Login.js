@@ -64,14 +64,14 @@ export default class Login extends Component {
                 <div className="col">
                 <label > User Name </label>
                 <br></br>
-                <input required = "true" type='text' className="form-control" value= {this.setState.username} onChange={this.onChangeUsername} placeholder='Enter Your User Name'/>                   
+                <input required = {true} type='text' className="form-control" value= {this.setState.username} onChange={this.onChangeUsername} placeholder='Enter Your User Name'/>                   
                 <br></br>
                 </div>
                 <br></br>
                 <div className="col">
                 <label > Password </label>
                 <br></br>
-                <input required = "true" type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Enter Your Password' />
+                <input required = {true} type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Enter Your Password' />
                 </div>
                 <br></br>
                 <input type='submit' value='Log In' className="btn btn-deep-orange darken-4"/>
