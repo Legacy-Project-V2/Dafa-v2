@@ -15,6 +15,7 @@ import Signup from './components/Signup';
 import EditItems from './components/edit';
 import axios from "axios"
 
+// import CategoryList from './components/CategoryList';
 
 function App() {
   const [userData, setUserData] = useState({ //why inside an array?
@@ -31,14 +32,14 @@ useEffect(() => {
       token = "";
     }
     const tokenRes = await axios.post(
-      "http://localhost:8000/addUser/tokenIsValid", 
+      "http://localhost:/addUser/tokenIsValid", 
       null, //the body is null, dont send anything to the body
       { headers: {"aaddUser-token": token}}
     );
     // console.log(tokenRes.data)// true or false 
     // to get the user 
     if(tokenRes.data){
-      const userRes = await axios.get("http//localhost:8000/addUser/Homepage",{ 
+      const userRes = await axios.get("http//localhost:/addUser/Homepage",{ 
         headers: {"aaddUser-token": token}, 
       });
       setUserData({

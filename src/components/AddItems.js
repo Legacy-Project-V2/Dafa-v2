@@ -70,6 +70,8 @@ import Footer from './Footer';
 
     console.log(item);
 
+
+
     axios.post("http://localhost:8000/addItems/add", item)
       .then(res => console.log(res.data));
 
