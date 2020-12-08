@@ -1,15 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from "react-router-dom";
 import axios from 'axios';
 import Footer from './Footer';
 import usercontext from "../context";
-import { useHistory } from "react-router-dom";
+
 
 
 
 export default function Signup() {
   const [username, setusername] = useState();
   const [password, setPassword] = useState();
-  const [Phone, setPhone] = useState();
+  const [phone, setPhone] = useState();
   const [address, setaddress] = useState();
   const [error, setError] = useState();
   const { setUserData } = useContext(usercontext)
@@ -20,14 +21,16 @@ export default function Signup() {
 
 
     const submit = async (e) => {
-      e.preventDefault();
+      e.preventDefault(); 
       try {
-        const newUser = { username, password, Phone, address };
-        await axios.post('htp:t//localhost:8000/addUser/adduser', newUser);
+        const newUser = { username, password, phone, address };
+        // console.log(newUser)
+        await axios.post('http://localhost:8000/addUser/adduser', newUser);
         const loginRes = await axios.post('http://localhost:8000/addUser/login', {
           username,
           password,
         });
+        // console.log(loginRes)
         setUserData({
           token: loginRes.data.token,
           user: loginRes.data.user,
@@ -37,7 +40,7 @@ export default function Signup() {
       }
       catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
-        console.log(err)
+        // console.log(err)
       }
     };
     
@@ -54,7 +57,7 @@ export default function Signup() {
                 Sign Up
                 </h3>
                 <br />
-                {error && <div message={error} clearError={() => setError(undefined)} />}
+                {error }
                 <div className = "col">
                 <label > UserName </label>
                 <br></br>

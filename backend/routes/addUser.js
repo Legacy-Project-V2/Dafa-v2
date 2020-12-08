@@ -19,6 +19,7 @@ const verifyToken = require("../token.middleware/middlwere");
 
   // SignUp
   router.post('/adduser', async (req, res) => {
+    console.log(req.body)
     const {error} = SignUpValidation(req.body);
     // if !email or !password or !name --> 400 status and senad a message
 if(error) return res.status(400).send({ msg: "Not all fields have been entered." });
@@ -93,6 +94,18 @@ res.header('addUser-token', token).send({
 // console.log(token)
 // res.send('Logged In!')
 });
+
+
+router.delete("/delete",verifyToken, async (req, res) => {
+  // console.log(req.user)
+  try {
+    const deletedUser = await AddUser.findByIdAndDelete(req.user);
+    res.send(deletedUser);
+  } catch (err) {
+    res.status(500).send('error');
+  }
+});
+
   
        
     //endpoint
@@ -115,7 +128,7 @@ res.header('addUser-token', token).send({
     }
   });
   
-  router.get("/Homepage", verifyToken, async (req, res) => {
+  router.get("/", verifyToken, async (req, res) => { //////////////////
     const user = await User.findById(req.user);
     // res.send(user)
     res.send({

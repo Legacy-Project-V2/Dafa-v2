@@ -12,7 +12,7 @@ if (isAuth){
 else
 {
     return (
-    <Redirect to= {{pathname : '/addUser', state: {from: props.location}}}/>
+    <Redirect to= {{pathname : '/adduser', state: {from: props.location}}}/>
        )
     } 
   }}/>

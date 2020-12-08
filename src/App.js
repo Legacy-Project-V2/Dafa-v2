@@ -64,9 +64,10 @@ return (
           <Navbar/>
       <Switch>
       <Route exact path = "/Homepage" component = { Homepage } />
+      <Route exact path = "/" component = { Homepage } />
         <ProtectedRoute path="/ItemsList" component={ItemsList} isAuth={localStorage.length>0}/>
         <ProtectedRoute path="/addItems" component={AddItems} isAuth={localStorage.length>0}/>
-        <Route path = "/addUser"  component = { Signup } />
+        <Route path = "/adduser"  component = { Signup } />
         <Route path = "/login" component = { Login } />
         <Route path = "/edit/:id" component = { EditItems }/>
         <Route path = "/logout" component = { Login } />
