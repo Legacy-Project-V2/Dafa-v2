@@ -28,7 +28,7 @@ export default class EditItems extends Component {
 
   componentDidMount() {
 
-    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
+    axios.get('http://localhost:8000/addItems/'+this.props.match.params.id)
 
     axios.get('http://localhost:8000/addItems/'+this.props.match.params.id)
 
