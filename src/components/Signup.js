@@ -1,110 +1,64 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import Footer from './Footer';
+import usercontext from "../context";
+import { useHistory } from "react-router-dom";
 
-//creat a class for the sign up component 
-export default class Signup extends Component {
-    constructor(props) {
-        super(props);
-            
-        //bind functions, you can use this.function without the need to bind it everytime
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangePhone = this.onChangePhone.bind(this);
-        this.onChangeAddress = this.onChangeAddress.bind(this);
-      
-        this.onSubmit = this.onSubmit.bind(this);
-      //the keys are the same as the Schema .. see the modle userSchema in user.model.js line 6 or so.
-      //this will work as blue prent to our state
-        this.state = {
-            username: '',
-            password:'',
-            phone:'',
-            address:''
-          }
 
-        }
-        //onChance function to track the changes and help to set (change) the state .
-          onChangeUsername(e) {
-            
-            this.setState({
-             username : e.target.value 
 
-            })
-          }
-          onChangePassword(e) {
-            
-            this.setState({
-            password : e.target.value
-            })
-          }
-          onChangePhone(e) {
-            
-            this.setState({
-                phone : e.target.value
-            })
-          }
-          onChangeAddress(e) {
-            
-            this.setState({
-                address : e.target.value
-            })
-          }
-          onSubmit(e) {
-            e.preventDefault();
-        //where we set the state and send it in the post request
-            const user = {
-              username: this.state.username,
-              password: this.state.password,
-              phone: this.state.phone,
-              address: this.state.address
-            }
-            //post request tosend the data to the serverwhereitwill be saved
-            //this condetion to prevent users from creating short user name for securty
-            // if (this.state.username.length < 4 ){
-            // alert('please choose another name')
-            // }
-            //the input should be a number this should give the user an alreat if they type anything not a number
-            // if (this.state.phone !== number){
-            //   alert('please make sure to fill in phone with numbers only')
-            // }
-            //add conctions if the user name already taken
-            //if(this.state.username )
-           
-            axios.post("http://localhost:3000/addUser/adduser", user)
-            .then(res => {
-            // console.log(user);
+export default function Signup() {
+  const [username, setusername] = useState();
+  const [password, setPassword] = useState();
+  const [Phone, setPhone] = useState();
+  const [address, setaddress] = useState();
+  const [error, setError] = useState();
+  const { setUserData } = useContext(usercontext)
+  const history = useHistory();
+  
+  
 
-            window.location = '/login'
-           console.log(window.location)
 
-            })  
-             
-           .catch(err => alert('user name or phone number is used') );
-          
 
-            //console.log('user added')   
-        }
-        
-        
-          
+    const submit = async (e) => {
+      e.preventDefault();
+      try {
+        const newUser = { username, password, Phone, address };
+        await axios.post('htp:t//localhost:8000/addUser/adduser', newUser);
+        const loginRes = await axios.post('http://localhost:8000/addUser/login', {
+          username,
+          password,
+        });
+        setUserData({
+          token: loginRes.data.token,
+          user: loginRes.data.user,
+        });
+        localStorage.setItem("aaddUser-token", loginRes.data.token);
+        history.push("/login");
+      }
+      catch (err) {
+        err.response.data.msg && setError(err.response.data.msg);
+        console.log(err)
+      }
+    };
+    
 
 //where the magic happence
-    render(){
+    
         return (
 
           <div>
             <br />
             <div className = "container text-center">
-            <form className="text-center border border-light p-9" onSubmit={this.onSubmit}>
+            <form className="text-center border border-light p-9" onSubmit={submit}>
                 <h3 className = "mb-3">
                 Sign Up
                 </h3>
                 <br />
+                {error && <div message={error} clearError={() => setError(undefined)} />}
                 <div className = "col">
-                <label > User Name </label>
+                <label > UserName </label>
                 <br></br>
-                <input required='{true}' type='text'className="form-control col"value= {this.setState.username}onChange={this.onChangeUsername} placeholder='User Name'/>                   
+                <input required='{true}' type='text'className="form-control col"   onChange={e => setusername(e.target.value)} placeholder='User Name'/>                   
                 <br></br>                
                 </div>
 
@@ -113,21 +67,21 @@ export default class Signup extends Component {
                 <div className = "col">
                 <label > Creat Password </label>
                 <br></br>
-                <input required='{true}'  type="password" name="password" className="form-control col"value= {this.setState.password} onChange={this.onChangePassword} placeholder='Creat Password' />
+                <input required='{true}'  type="password" name="password" className="form-control col" onChange={e => setPassword(e.target.value)} placeholder='Creat Password' />
                 <br></br>
                 </div>
 
                 <div className = "col">
                 <label > Phone Number </label>
 
-                <input required='{true}'  className="form-control col"  value= {this.setState.phone} onChange={this.onChangePhone} placeholder='Phone Number' />
+                <input required='{true}'  className="form-control col"  onChange={e => setPhone(e.target.value)}  placeholder='Phone Number' />
                 <br></br>
                 </div>
 
-                <div className = "col">
+                <div className = "col"> 
                 <label > Address </label>
                 <br></br>
-                <input required='{true}' type='text' className="form-control col" value= {this.setState.address} onChange={this.onChangeAddress} placeholder='Address' />
+                <input required='{true}' type='text' className="form-control col"  onChange={e => setaddress(e.target.value)} placeholder='Address' />
                 <br></br>
                 </div>
 
@@ -144,7 +98,4 @@ export default class Signup extends Component {
           
          
         )
-    }
-}
-
-
+    };

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt =require('jsonwebtoken');
 const {SignUpValidation, loginValidation} = require('../validation.js');
 const verifyToken = require("../token.middleware/middlwere");
+// const verfiy = require('./verifyToken')
 
 
 
@@ -73,12 +74,12 @@ if(error) return res.status(400).send({ msg: "Not all fields have been entered."
       const user = await AddUser.findOne({
         username: req.body.username
       })
-      if (!user) {return res.status(400).send("there is no account with this username, please check your username?")};
+      if (!user) return res.status(400).send({msg:"there is no account with this username, please check your username?"});
 
     //checking if password is correct
 
       const validpassword = await bcrypt.compare(req.body.password, user.password)
-      if (!validpassword) return res.status(400).send('Invalid Password');
+      if (!validpassword) return res.status(400).send({msg:'Invalid Password'});
 
     //create and assign a TOKEN
 const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET );
@@ -114,7 +115,7 @@ res.header('addUser-token', token).send({
     }
   });
   
-  router.get("/", verifyToken, async (req, res) => {
+  router.get("/Homepage", verifyToken, async (req, res) => {
     const user = await User.findById(req.user);
     // res.send(user)
     res.send({

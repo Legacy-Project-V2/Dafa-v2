@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AddItems = require('../models/addItems.model');
-const verfiy = require('./verifyToken')
-const { requireAuth } = require('./verifyToken')
+// const verfiy = require('./verifyToken')
+// const { requireAuth } = require('./verifyToken')
 //AddItems is the schema
 //CRUD Operations:
 // 

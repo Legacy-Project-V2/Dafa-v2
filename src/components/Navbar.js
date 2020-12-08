@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Authbuttons from "./AuthButtons"
 
 
 export default class Navbar extends Component {
@@ -15,14 +16,15 @@ export default class Navbar extends Component {
           <Link to="/AddItems" className="nav-link">Add Items</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/ItemsList" className="nav-link">Clothes</Link>
+          <Link to="/ItemsList" className="nav-link">View Items</Link>
           </li>
-          <li className="navbar-item">
+          <Authbuttons/>
+          {/* <li className="navbar-item">
           <Link to="/login" className="nav-link">Login</Link>
-          </li>
-          <li className="navbar-item"onClick={logout}>
+          </li> */}
+          {/* <li className="navbar-item"onClick={logout}>
           <Link to="/logout" className="nav-link">Log out</Link>
-          </li>
+          </li> */}
         </ul>
         </div>
       </nav>
@@ -32,9 +34,9 @@ export default class Navbar extends Component {
 }
 
 
- function logout(){
+//  function logout(){
 
-  window.localStorage.clear();
-  window.location = '/Homepage'
+//   window.localStorage.clear();
+//   window.location = '/Homepage'
 
- }
+//  }
