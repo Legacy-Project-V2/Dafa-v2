@@ -43,10 +43,8 @@ import Footer from './Footer';
     const { value } = e.target
     this.setState({
      type: value
-    });
-    
+    }); 
   }
-
   onChangeDescription(e) {
     this.setState({
       description: e.target.value
