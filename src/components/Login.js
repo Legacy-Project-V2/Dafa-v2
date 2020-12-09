@@ -25,15 +25,23 @@ export default function Login(){
           user: loginRes.data.user,
         });
         localStorage.setItem("aaddUser-token", loginRes.data.token);
+        const trying = axios.post("http://localhost:8000/addUser/tokenIsValid" , setUserData.token)
+        console.log(trying)
         history.push("/AddItems")
       } catch (err) {
         err.response.data.msg && setError(err.response.data.msg);
         console.log(err.response.data.msg)
       }
+         
     };
 
         return (
                <div>
+
+
+
+
+
                <br />
                <div className = "container">
                 <form className="text-center border border-light p-9" onSubmit={submit}>

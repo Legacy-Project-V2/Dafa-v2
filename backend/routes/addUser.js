@@ -7,18 +7,17 @@ const verifyToken = require("../token.middleware/middlwere");
 // const verfiy = require('./verifyToken')
 
 
-
-
-// router.route('/').get((req, res) => {
-//       AddUser.find()
-//     .then(users => res.json(users))
-//     .catch(err => res.status(400).json('Error: ' + err));
+router.route('/Homepage').get((req, res) => {
+      AddUser.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(400).json('Error: ' + err));
   
-//   });
+  });
 
 
   // SignUp
   router.post('/adduser', async (req, res) => {
+    console.log(req.body)
     const {error} = SignUpValidation(req.body);
     // if !email or !password or !name --> 400 status and senad a message
 if(error) return res.status(400).send({ msg: "Not all fields have been entered." });
@@ -93,6 +92,18 @@ res.header('addUser-token', token).send({
 // console.log(token)
 // res.send('Logged In!')
 });
+
+
+router.delete("/delete",verifyToken, async (req, res) => {
+  // console.log(req.user)
+  try {
+    const deletedUser = await AddUser.findByIdAndDelete(req.user);
+    res.send(deletedUser);
+  } catch (err) {
+    res.status(500).send('error');
+  }
+});
+
   
        
     //endpoint
@@ -100,8 +111,11 @@ res.header('addUser-token', token).send({
   router.post("/tokenIsValid", async (req, res) => {
     try {
       const token = req.header("addUser-token");
+      console.log(req)
       console.log(token, 'faded')
-      if (!token) return res.send(false);
+      if (!token) return res.send("token is needed");
+      if (token) return res.send("token");
+
   
       const verified = jwt.verify(token, process.env.JWT_SECRET);
       if (!verified) return res.send(false);
@@ -115,7 +129,7 @@ res.header('addUser-token', token).send({
     }
   });
   
-  router.get("/Homepage", verifyToken, async (req, res) => {
+  router.get("/Homepage", verifyToken, async (req, res) => { //////////////////
     const user = await User.findById(req.user);
     // res.send(user)
     res.send({

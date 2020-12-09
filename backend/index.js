@@ -20,7 +20,7 @@ const uri = process.env.ATLAS_URI;
 mongoose.connect( uri , { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 const connection = mongoose.connection;
 connection.once('open', function() {
-  console.log('MongoDB Connected!')
+  console.log('MongoDB database connection established successfully!')
 });
 
 //Connect to routers

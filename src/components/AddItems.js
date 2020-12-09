@@ -50,10 +50,8 @@ import {storage,database} from '../firebase'
     const { value } = e.target
     this.setState({
      type: value
-    });
-    
+    }); 
   }
-
   onChangeDescription(e) {
     this.setState({
       description: e.target.value

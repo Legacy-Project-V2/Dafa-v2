@@ -17,10 +17,10 @@ const verifyToken = (req, res, next) => {
      // in the req object i want to add a user and verifie it ,, and from the verified object we get the id
     //  so the delete now knows the user try to uncomment the console.log in routes/auth line 78 and see your user id <3
     req.user = verified._id;
-    // console.log(verified)
+    console.log(verified)
     next();
   } catch (err) {
-    res.status(500).send("holaaa");
+    res.status(500).send({msg:"holaaa"});
   }
 };
 

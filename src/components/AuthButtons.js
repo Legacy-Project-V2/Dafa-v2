@@ -28,12 +28,12 @@ export default function Authbuttonss() {
         <nav className="auth-buttonss">
             {userData.user ? (
                <li className="navbar-item ml-auto" onClick={logout}>
-               <Link to="/logout" className="nav-link ">Log out</Link>
+               <Link to="/logout" className="nav-link ">LogOut</Link>
                </li> 
             ) : (
                     <>
                         <li className="navbar-item  ml-auto">
-          <Link to="/adduser" className="nav-link" onClick={signup}>signup</Link>
+          <Link to="/adduser" className="nav-link" onClick={signup}>SignUp</Link>
           </li>
                         {/* <li className="navbar-item">
           <Link to="/login" className="nav-link"  onClick={login}>Login</Link>
