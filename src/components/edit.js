@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import firebase from '../firebase';
+import {storage,database} from '../firebase'
 
 
 
@@ -12,22 +14,35 @@ export default class EditItems extends Component {
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChangeimg = this.onChangeimg.bind(this);
+    // this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    // this.onChangetype = this.handleUpload.bind(this);
 
     this.state = {
       itemName: "",
       category : "Women",
       description: "",
-      image : "",
+      // image : null,
+      // url :"",
+      progress : 0,
       type:"Jacket",
     
     }
   }
 
 
-  componentDidMount() {
-    axios.get('http://localhost:3000/addItems/'+this.props.match.params.id)
+  // retrieveData() {
+  //   axios.get("http://localhost:8000/addItems/")   
+  //           .then( res => {
+  //               this.setState({items: res.data})
+  //           })
+  //           .catch((error) => {
+  //               console.log(error);
+  //           })
+  // }
+
+  retrieveOneItem() {
+    axios.get('http://localhost:8000/addItems/'+this.props.match.params.id)
 
     
       .then(response => {
@@ -38,11 +53,18 @@ export default class EditItems extends Component {
           image: response.data.image,
           type: response.data.type,
         })  
+      console.log("retrieve one client side",response.data)
 
       })
       .catch(function (error) {
         console.log(error);
       })
+  }
+
+  componentDidMount() {
+    // this.retrieveData();
+    this.retrieveOneItem();
+    
     }
 
   //List of category
@@ -71,25 +93,64 @@ export default class EditItems extends Component {
       description: e.target.value
     });
   }
-  onChangeimg(e) {
-    this.setState({
-      image : e.target.value
-    });
-  }
+
+
+  // onChangeimg(e) {
+  //   if(e.target.files[0]){
+  //     this.setState({
+  //       image : e.target.files[0]
+  //     })
+  //     console.log('image',e.target.files[0])
+      
+  //   }
+  // }
+  
+//  handleUpload() {
+    
+//     const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+//     uploadTask.on(
+//       "state_changed",
+//       snapshot => {
+//         const progress = Math.round(
+//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+//         );
+//         this.setState ({
+//           progress : progress
+//         })
+//       },
+//       error => {
+//         console.log(error);
+//       },
+    
+//       () => {
+//         storage
+//           .ref("images")
+//           .child(this.state.image.name)
+//           .getDownloadURL()
+//           .then(url => {
+//             this.setState({
+//               url : url
+//             })
+//           });
+//       }
+//     );
+//   }
+
 
   onSubmit(e) {
+    console.log(this.state.url)
     e.preventDefault();
     const item = {
       itemName: this.state.itemName,
       category: this.state.category,
       description: this.state.description,
       type:this.state.type,
-      image:this.state.image
+      // image:this.state.url
     }
 
     console.log(item);
 
-    axios.post("http://localhost:3000/addItems/update/"+this.props.match.params.id, item)
+    axios.post("http://localhost:8000/addItems/update/"+this.props.match.params.id, item)
       .then(res => console.log(res.data));
 
     window.location = '/ItemsList'
@@ -167,18 +228,21 @@ export default class EditItems extends Component {
 
                 <br />
                 
-         <div >
-         <div className = "addimg">
-            <label>Add Image URL</label>
-            <input 
-              type = "text" 
-              className = "form-control"
-              value = {this.state.image} 
-              onChange = {this.onChangeimg}/>
-          </div>
-        
-</div>   
+                {/* <div className = "col">
+                    <label>Add Image</label>
+                    <input 
+                      type = "file" 
+                      required="true"
+                      className = "form-control" 
+                      onChange = {this.onChangeimg}
+                      />
+                  </div>  
+                  
 
+                  <button onClick={this.handleUpload}>Upload</button>
+                
+                  <br />
+                  <img src = {this.state.url || "http://via.placeholder.com/100*150"} alt = "firebase-image"/> */}
                 <div>
                 <button type="submit" value = "Submit" className="btn btn-dark">Edit</button>
                 </div>

@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { withRouter } from "react-router-dom" ;
 import Footer from './Footer';
+import firebase from '../firebase';
+import {storage,database} from '../firebase'
+
 
 
  class AddItems extends Component {
+ 
   constructor(props) {
     super(props);
 
@@ -15,12 +19,15 @@ import Footer from './Footer';
     this.onSubmit = this.onSubmit.bind(this);
     this.onChangeimg = this.onChangeimg.bind(this);
     this.onChangetype = this.onChangetype.bind(this);
+    this.handleUpload = this.handleUpload.bind(this);
 
     this.state = {
       itemName: "",
       category : "Women",
       description: "",
-      image : "",
+      image : null,
+      url :"",
+      progress : 0,
       type:"Jacket"
     }
   }
@@ -52,28 +59,74 @@ import Footer from './Footer';
       description: e.target.value
     });
   }
+
+
   onChangeimg(e) {
-    this.setState({
-      image : e.target.value
-    });
+    
+    if(e.target.files[0]){
+      this.setState({
+        image : e.target.files[0]
+      })
+      console.log('image',e.target.files[0])
+      
+    }
+   
   }
 
+  handleUpload() {
+    
+    const uploadTask = storage.ref(`images/${this.state.image.name}`).put(this.state.image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState ({
+          progress : progress
+        })
+      },
+      error => {
+        console.log(error);
+      },
+    
+      () => {
+        storage
+          .ref("images")
+          .child(this.state.image.name)
+          .getDownloadURL()
+          .then(url => {
+            this.setState({
+              url : url
+            })
+          });
+      }
+    );
+  }
+
+ 
+
   onSubmit(e) {
+  //  console.log(this.state.url)
     e.preventDefault();
     const item = {
       itemName: this.state.itemName,
       category: this.state.category,
       description: this.state.description,
       type:this.state.type,
-      image:this.state.image
+      image:this.state.url
     }
 
-    console.log(item);
+    
+   
 
-    axios.post("http://localhost:3000/addItems/add", item)
+    axios.post("http://localhost:8000/addItems/add", item)
       .then(res => console.log(res.data));
+   
 
-    window.location = '/ItemsList'
+      console.log(item);
+      window.location = '/ItemsList'
+   
   }
 
   render() {
@@ -94,7 +147,7 @@ import Footer from './Footer';
                 required="true"
                   type = "text" 
                   className = "form-control" 
-                  value = {this.state.itemName} 
+                  value = {this.state.itemName}
                   onChange = {this.onChangeItemName}
                   text-align = "center"
                   placeholder = "Insert Item Name"/>
@@ -155,16 +208,20 @@ import Footer from './Footer';
                 <br />
                 
                 <div className = "col">
-                    <label>Add Image as URL</label>
+                    <label>Add Image</label>
                     <input 
-                      type = "text" 
+                      type = "file" 
                       required="true"
                       className = "form-control" 
-                      value = {this.state.image} 
-                      onChange = {this.onChangeimg}/>
+                      onChange = {this.onChangeimg}
+                      />
                   </div>  
+                  
 
+                  <button onClick={this.handleUpload}>Upload</button>
+                
                   <br />
+                  <img src = {this.state.url || "http://via.placeholder.com/100*150"} alt = "firebase-image"/>
 
                 <div>
                 <button type="submit" value = "Submit" className="btn btn-deep-orange darken-4">Submit</button>
