@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const AddItems = require('../models/addItems.model');
-const verfiy = require('./verifyToken')
-const { requireAuth } = require('./verifyToken')
+// const verfiy = require('./verifyToken')
+// const { requireAuth } = require('./verifyToken')
 //AddItems is the schema
 //CRUD Operations:
 // 
@@ -19,16 +19,20 @@ router.route('/add').post((req, res) => {
   const category = req.body.category;
   const description = req.body.description;
   const image=req.body.image;
+  // const url = req.body.url;
   const type = req.body.type;
+  console.log("image server", req.body)
 
   const newItem = new AddItems ({
     itemName,
     category,
     description,
     image,
+    // url : req.body.,
     type
   });
   
+  console.log(newItem);
   newItem.save()
   .then(() => res.json("Item Added!"))
   .catch(err => res.status(400).json("Error: " + err));
@@ -56,7 +60,9 @@ router.route("/update/:id", ).post((req, res) => {
     items.category = req.body.category;
     items.description = req.body.description;
     items.type = req.body.type;
-    items.image = req.body.image;
+    // items.image = req.body.image;
+    // items.url = req.body.url;
+  
     items.save()
     .then(() => res.json("Item is updated!"))
     .catch(err => res.status(400).json('Error: ' + err));

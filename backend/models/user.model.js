@@ -1,5 +1,5 @@
 const mongoose= require('mongoose');
-const { schema } = require('./addItems.model');
+// const schema  = require('./addItems.model');
 
 const Schema = mongoose.Schema;
 //creat the Schema, what data we want to be saved

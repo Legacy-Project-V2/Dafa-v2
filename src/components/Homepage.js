@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Slideshow from './Carousel';
 import Cards from './Cards';
 import { MDBContainer, MDBFooter } from "mdbreact";
-export default class Homepage extends Component {
-    render() {
+export default function Homepage() {
+   
         return(
             <div className = "bg-dark justify-content-between">
                 <br />
@@ -20,4 +20,3 @@ export default class Homepage extends Component {
             </div>
         )
     }
-}
