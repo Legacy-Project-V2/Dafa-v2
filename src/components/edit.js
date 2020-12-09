@@ -150,7 +150,9 @@ export default class EditItems extends Component {
 
     console.log(item);
 
+
     axios.post("http://localhost:8000/addItems/update/"+this.props.match.params.id, item)
+
       .then(res => console.log(res.data));
 
     window.location = '/ItemsList'

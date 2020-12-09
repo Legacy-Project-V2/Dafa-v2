@@ -144,7 +144,7 @@ import {storage,database} from '../firebase'
                 <div className="col">
                 <label>Item Name</label>
                 <input 
-                required="true"
+                required="{true}"
                   type = "text" 
                   className = "form-control" 
                   value = {this.state.itemName}
@@ -159,7 +159,7 @@ import {storage,database} from '../firebase'
                   <label>Select Category  </label>
                   <select
                     ref = "userInput"
-                    required="true"
+                    required="{true}"
                     className = "form-control"
                     value = {this.state.category}
                     onChange = {this.onChangeCategory}
@@ -176,7 +176,7 @@ import {storage,database} from '../firebase'
                   <label>Select Type  </label>
                   <select
                     ref = "userInput"
-                    required="true"
+                    required="{true}"
                     className = "form-control"
                     value = {this.state.type}
                     onChange = {this.onChangetype}
@@ -198,7 +198,7 @@ import {storage,database} from '../firebase'
                   <label>Description  </label>
                   <input 
                     type = "text" 
-                    required="true"
+                    required="{true}"
                     className = "form-control" 
                     value = {this.state.description} 
                     onChange = {this.onChangeDescription}
