@@ -2,7 +2,7 @@ const router = require('express').Router();
 const verify = require('./verifyToken.js');
 
 //whenever we make an http get request method to '/' to our server, then execute this function
-router.get('/',verify, (req,res)=>{
+router.get('/Homepage',verify, (req,res)=>{
     // router.get('/', (req,res)=>{
     // res.json({
     //     posts: {

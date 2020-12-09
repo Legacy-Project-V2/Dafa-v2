@@ -9,12 +9,12 @@ const verifyToken = require("../token.middleware/middlwere");
 
 
 
-// router.route('/').get((req, res) => {
-//       AddUser.find()
-//     .then(users => res.json(users))
-//     .catch(err => res.status(400).json('Error: ' + err));
+router.route('/Homepage').get((req, res) => {
+      AddUser.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(400).json('Error: ' + err));
   
-//   });
+  });
 
 
   // SignUp
@@ -128,7 +128,7 @@ router.delete("/delete",verifyToken, async (req, res) => {
     }
   });
   
-  router.get("/", verifyToken, async (req, res) => { //////////////////
+  router.get("/Homepage", verifyToken, async (req, res) => { //////////////////
     const user = await User.findById(req.user);
     // res.send(user)
     res.send({
