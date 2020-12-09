@@ -42,8 +42,14 @@ const ClothesItem = props => (
                 type: ''
             }
         }
+<<<<<<< HEAD
+    }
+
+    componentDidMount() {
+=======
     
            componentDidMount() {
+>>>>>>> 9019bf55cdfc8d3f97ab71ded4feb90c84948c4b
          axios.get("http://localhost:8000/addItems/")   
             .then( res => {
                 this.setState({items: res.data})
@@ -53,6 +59,30 @@ const ClothesItem = props => (
             })
     }
 
+<<<<<<< HEAD
+    deleteItem(id) {
+        axios.delete("http://localhost:8000/addItems/" + id)
+            .then(res => console.log(res.data));
+        this.setState({
+            items: this.state.items.filter(el => el._id !== id)
+        })
+    }
+
+    itemsList() {
+        let listedItems = (this.state.filteredItems.length > 0)? this.state.filteredItems : this.state.items; 
+
+        return listedItems.map(currentItem => {
+            return <ClothesItem item = { currentItem } deleteItem = { this.deleteItem } key = { currentItem._id }/>; 
+        })
+    } 
+
+    onSearch = e => {
+        let { items } = this.state
+        let string = e.target.value
+        if(string.length > 0){
+           let filteredItems = items.filter(item => item.itemName.includes(string))
+           this.setState({SearchString:string,filteredItems:filteredItems})
+=======
     
         deleteItem(id) {
             axios.delete("http://localhost:8000/addItems/" + id)
@@ -61,6 +91,7 @@ const ClothesItem = props => (
                 items: this.state.items.filter(el => el._id !== id)
             })
             window.location = '/ItemsList'
+>>>>>>> 9019bf55cdfc8d3f97ab71ded4feb90c84948c4b
         }
     
         itemsList() {

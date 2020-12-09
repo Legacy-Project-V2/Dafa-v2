@@ -9,7 +9,8 @@ const addItemsSchema = new Schema ({
   category: { type: String, required: true, trim: true },
   type: { type: String, required: true, trim: true },
   description: { type: String, required: true, trim: true },
-  image : {type:String,required: true, trim: true}
+  image : {type:String,required: true, trim: true},
+  // url : {type:String, trim: true}
 }, {timestamps: true,});
 
 const AddItems = mongoose.model("AddItems", addItemsSchema);
