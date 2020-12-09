@@ -7,8 +7,6 @@ const verifyToken = require("../token.middleware/middlwere");
 // const verfiy = require('./verifyToken')
 
 
-
-
 router.route('/Homepage').get((req, res) => {
       AddUser.find()
     .then(users => res.json(users))
@@ -113,8 +111,11 @@ router.delete("/delete",verifyToken, async (req, res) => {
   router.post("/tokenIsValid", async (req, res) => {
     try {
       const token = req.header("addUser-token");
+      console.log(req)
       console.log(token, 'faded')
-      if (!token) return res.send(false);
+      if (!token) return res.send("token is needed");
+      if (token) return res.send("token");
+
   
       const verified = jwt.verify(token, process.env.JWT_SECRET);
       if (!verified) return res.send(false);
